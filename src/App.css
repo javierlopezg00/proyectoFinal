@@ -26,6 +26,19 @@
 
 .App-link {
   color: #61dafb;
+  
+}
+
+#textoHomePageElement{
+    font-size: 20px;
+    line-height: 20px;
+    padding: 0 20px;
+    text-align: justify;
+    vertical-align: top;
+    width: 80%;
+    column-count: 3;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @keyframes App-logo-spin {

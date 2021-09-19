@@ -64,7 +64,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Registrate
+            Contacto
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -94,16 +94,6 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="email"
-                  label="DPI"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
                   label="Correo Electronico"
                   name="email"
                   autoComplete="email"
@@ -120,30 +110,26 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
+
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="date"
-                  type="date"
-                  id="date"
+              <TextField
+                id="outlined-multiline-static"
+                label="Mensaje"
+                multiline
+                rows={8}
                 />
-              </Grid>
+                </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              
             >
-              Registrarse
+              Enviar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/SignIn" variant="body2">
-                  Ya esta registrado?
-                </Link>
               </Grid>
             </Grid>
           </Box>

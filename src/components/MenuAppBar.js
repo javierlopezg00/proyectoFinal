@@ -2,7 +2,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -11,14 +10,24 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+
 
 import {
-  BrowserRouter as Router,
-  Link
+  BrowserRouter as Router
 } from "react-router-dom";
 
+
+const theme = createTheme({
+  palette: {
+    secondary:{
+      main:"#ffa43a",
+    }
+  },
+  
+});
 
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
@@ -37,7 +46,12 @@ export default function MenuAppBar() {
   };
 
   return (
+    
+    
     <Router>
+
+    
+
     <Box sx={{ flexGrow: 1 }}>
       <FormGroup>
         <FormControlLabel
@@ -51,7 +65,7 @@ export default function MenuAppBar() {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>
-      <AppBar position="static">
+      <AppBar position="static" color ="primary">
         <Toolbar>
           <IconButton
             size="large"
@@ -62,17 +76,12 @@ export default function MenuAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}><Button variant="contained">Inicio</Button>
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Button variant="contained">Noticias</Button>
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Button variant="contained">Informacion</Button>
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Button variant="contained">Contacto</Button>
-          </Typography>
+          <ThemeProvider theme={theme}>
+          <Button variant="text" color="secondary">Inicio</Button>
+          <Button variant="text" color="secondary">Noticias</Button>
+          <Button variant="text" color="secondary">Informacion</Button>
+          <Button variant="text" color="secondary">Contacto</Button>
+          </ThemeProvider>
           {auth && (
             <div>
               <IconButton
@@ -100,8 +109,8 @@ export default function MenuAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-              <MenuItem onClick={handleClose}><Link href="/signIn">Iniciar Sesion</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link href="/signUp">Registro</Link></MenuItem>
+              <MenuItem onClick={handleClose}>Iniciar Sesion</MenuItem>
+              <MenuItem onClick={handleClose}>Registro</MenuItem>
 
               </Menu>
                   </div>
@@ -110,6 +119,8 @@ export default function MenuAppBar() {
         </Toolbar>
       </AppBar>
     </Box>
+    
     </Router>
+    
   );
 }

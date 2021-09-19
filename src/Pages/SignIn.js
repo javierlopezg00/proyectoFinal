@@ -12,7 +12,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import MenuAppBar from '../components/MenuAppBar';
 
 function Copyright(props) {
   return (
@@ -27,7 +26,16 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary:{
+      main:"#525558",
+      light: "#75c7ff",
+      dark:"#759eff",
+      contrastText: "#ffa43a"
+    }
+  },
+});
 
 export default function SignIn() {
   const handleSubmit = (event) => {
@@ -42,8 +50,6 @@ export default function SignIn() {
 
   return (
     <div>
-    <MenuAppBar />
-    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
