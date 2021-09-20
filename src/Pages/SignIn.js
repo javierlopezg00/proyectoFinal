@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +12,22 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const URL_LOGIN = "http://localhost/ws-login/login.php";
+
+const enviarData = async (url,data)=>{
+  const resp = await fetch (url,{
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  console.log(resp);
+  const json = await resp.json();
+  console.log(json);
+}
+
 
 function Copyright(props) {
   return (
@@ -38,15 +54,21 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+
+
+  const handleLogin=(event)=>{
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    
+      const datos = {
+        "dpi": data.get('dpi'),
+        "clave": data.get('clave')
+      };
+      console.log(datos);
+      enviarData(URL_LOGIN,datos);
+      
+
+  }
 
   return (
     <div>
@@ -67,26 +89,28 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Iniciar Sesion
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
             <TextField
+              type ="text"
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="dpi"
               label="DPI"
-              name="email"
-              autoComplete="email"
-              autoFocus
+              name="dpi"
+              autoComplete="dpi"
+              
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
+              name="clave"
+              label="Clave"
               type="password"
               id="password"
               autoComplete="current-password"
+              
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -97,6 +121,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              
             >
               Acceder
             </Button>

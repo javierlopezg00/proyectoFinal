@@ -11,6 +11,23 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const URL_REG = "http://localhost/ws-login/signUp.php";
+
+const enviarData = async (url,data)=>{
+  const resp = await fetch (url,{
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  console.log(resp);
+  const json = await resp.json();
+  console.log(json);
+  
+}
+
+
 function Copyright(props) {
   return (
     
@@ -37,15 +54,22 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const handleRegister=(event)=>{
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+      const datos = {
+        "nombre": data.get('nombre'),
+        "apellido": data.get('apellido'),
+        "dpi": data.get('dpi'),
+        "clave": data.get('clave'),
+        "correo": data.get('email'),
+        "celular": data.get('celular'),
+        "date": data.get('date'),
+
+      };
+      console.log(datos);
+      enviarData(URL_REG,datos);
+  }
 
   return (
     <div>
@@ -66,12 +90,12 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Registrate
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleRegister} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="fname"
-                  name="Nombre"
+                  name="nombre"
                   required
                   fullWidth
                   id="firstName"
@@ -85,7 +109,7 @@ export default function SignUp() {
                   fullWidth
                   id="lastName"
                   label="Apellido"
-                  name="lastName"
+                  name="apellido"
                   autoComplete="lname"
                 />
               </Grid>
@@ -93,9 +117,8 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
                   label="DPI"
-                  name="email"
+                  name="dpi"
                   autoComplete="email"
                 />
               </Grid>
@@ -103,7 +126,16 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
+                  label="Clave"
+                  name="clave"
+                  autoComplete="clave"
+                  type = "password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   label="Correo Electronico"
                   name="email"
                   autoComplete="email"
@@ -113,7 +145,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="password"
+                  name="celular"
                   label="Celular"
                   type="text"
                   id="password"
