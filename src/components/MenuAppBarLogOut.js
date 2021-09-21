@@ -1,26 +1,18 @@
-import React, { useState } from "react";
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink} from 'react-router-dom';
-
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles,
-  Drawer,
-} from "@material-ui/core";
-
-
 
 const theme = createTheme({
   palette: {
@@ -30,66 +22,18 @@ const theme = createTheme({
   },
   
 });
-//prueba
-const useStyles = makeStyles((theme) => ({
-  menuSliderContainer: {
-    width: 250,
-    background: "#525558",
-    height: "100%"
-  },
-  listItem: {
-    color: "tan"
-  }
-}));
 
-const listItems = [
-  {
-    listText: "Home"
-  },
-  {
-    listText: "Resume"
-  },
-  {
-    listText: "Portfolio"
-  },
-  {
-    listText: "Contacts"
-  }
-];
-//pruebaEND
+
+
 
 
 export default function MenuAppBar() {
-
-  //prueba
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-
-  const toggleSlider = () => {
-    setOpen(!open);
-  };
-
-  const sideList = () => (
-    <Box className={classes.menuSliderContainer} component="div">
-      
-      <List>
-        {listItems.map((listItem, index) => (
-          <ListItem className={classes.listItem} button key={index}>
-            <ListItemIcon className={classes.listItem}>
-              {listItem.listIcon}
-            </ListItemIcon>
-            <ListItemText primary={listItem.listText} />
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-  //pruebaEND
-
-
-  const [auth] = React.useState(true);
+  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -102,7 +46,18 @@ export default function MenuAppBar() {
   return (
     
     <Box sx={{ flexGrow: 1 }}>
-
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={auth}
+              onChange={handleChange}
+              aria-label="login switch"
+            />
+          }
+          label={auth ? 'Logout' : 'Login'}
+        />
+      </FormGroup>
       <AppBar position="static" color ="primary">
         <Toolbar>
           <IconButton
@@ -111,7 +66,6 @@ export default function MenuAppBar() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={toggleSlider}
           >
             <MenuIcon />
           </IconButton>
@@ -121,9 +75,6 @@ export default function MenuAppBar() {
           <Button variant="text" color="secondary"><NavLink to = "/information" >Informacion</NavLink></Button>
           <Button variant="text" color="secondary"><NavLink to = "/contact" >Contacto</NavLink></Button>
           </ThemeProvider>
-          <Drawer open={open} anchor="right" onClose={toggleSlider}>
-              {sideList()}
-            </Drawer>
           {auth && (
             <div>
               <IconButton
@@ -153,6 +104,7 @@ export default function MenuAppBar() {
               >
               <MenuItem onClick={handleClose}><NavLink to ="/signIn">Iniciar Sesion</NavLink></MenuItem>
               <MenuItem onClick={handleClose}><NavLink to ="/signUp">Registro</NavLink></MenuItem>
+
               </Menu>
                   </div>
                   

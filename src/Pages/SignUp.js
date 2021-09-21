@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import  Checkbox  from '@mui/material/Checkbox';
 
 const URL_REG = "http://localhost/ws-login/signUp.php";
 
@@ -22,12 +23,7 @@ const enviarData = async (url,data)=>{
     }
   });
   console.log(resp);
-  const json = await resp.json();
-  console.log(json);
-  
 }
-
-
 function Copyright(props) {
   return (
     
@@ -41,7 +37,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 const theme = createTheme({
   palette: {
     primary:{
@@ -62,13 +57,13 @@ export default function SignUp() {
         "apellido": data.get('apellido'),
         "dpi": data.get('dpi'),
         "clave": data.get('clave'),
-        "correo": data.get('email'),
+        "correo": data.get('correo'),
         "celular": data.get('celular'),
-        "date": data.get('date'),
-
+        "fecha_de_nacimiento": data.get('fecha_de_nacimiento'),
+        "enfermedad": data.get('enfermedad')
       };
       console.log(datos);
-      enviarData(URL_REG,datos);
+      enviarData(URL_REG, datos);
   }
 
   return (
@@ -119,7 +114,7 @@ export default function SignUp() {
                   fullWidth
                   label="DPI"
                   name="dpi"
-                  autoComplete="email"
+                  autoComplete="dpi"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -137,8 +132,8 @@ export default function SignUp() {
                   required
                   fullWidth
                   label="Correo Electronico"
-                  name="email"
-                  autoComplete="email"
+                  name="correo"
+                  autoComplete="correo"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -148,7 +143,6 @@ export default function SignUp() {
                   name="celular"
                   label="Celular"
                   type="text"
-                  id="password"
                   autoComplete="new-password"
                 />
               </Grid>
@@ -156,10 +150,13 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="date"
+                  name="fecha_de_nacimiento"
                   type="date"
                   id="date"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <h4>Enfermedad Cronica<Checkbox name="enfermedad" value="on"/></h4> 
               </Grid>
             </Grid>
             <Button

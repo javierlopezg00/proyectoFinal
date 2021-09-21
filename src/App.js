@@ -1,19 +1,6 @@
 import './App.css';
-import SignIn from './Pages/SignIn';
-import SignUp from './Pages/SignUp';
-import Contact from './Pages/Contact';
-import HomePage from './Pages/HomePage';
-import Information from './Pages/Information';
-import MenuAppBar from './components/MenuAppBar';
 import { createTheme ,ThemeProvider } from '@mui/material/styles';
-import News from './Pages/News';
-
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from "react-router-dom";
+import AppRouter from './routers/AppRouter';
 
 
 const theme = createTheme({
@@ -29,21 +16,12 @@ const theme = createTheme({
 
 function App() {
   return (
-    <Router>
     <ThemeProvider theme={theme}>
     <div className="App">
-    <MenuAppBar/>
-    <Switch>
-        <Route  exact path="/signIn"  component={SignIn}/>
-        <Route  exact path="/signUp"  component={SignUp}/>
-        <Route  exact path="/contact"  component={Contact}/>
-        <Route  exact path="/homePage"  component={HomePage}/>
-        <Route  exact path="/news"  component={News}/>
-        <Route  exact path="/information"  component={Information}/>
-    </Switch>   
+    <AppRouter />
+       
     </div>
-    </ThemeProvider>
-    </Router>     
+    </ThemeProvider>  
   );
 }
 
