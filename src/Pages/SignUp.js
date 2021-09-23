@@ -153,6 +153,7 @@ export default function SignUp() {
                   name="fecha_de_nacimiento"
                   type="date"
                   id="date"
+                  min='2010-01-01'
                 />
               </Grid>
               <Grid item xs={12}>

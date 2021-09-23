@@ -29,18 +29,6 @@
   
 }
 
-#textoHomePageElement{
-    font-size: 20px;
-    line-height: 20px;
-    padding: 0 20px;
-    text-align: justify;
-    vertical-align: top;
-    width: 80%;
-    column-count: 3;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -49,3 +37,70 @@
     transform: rotate(360deg);
   }
 }
+/*NEWS*/
+#divNoticias{
+  padding-top: 1%;
+  margin: 1.5%;
+  width: 97%;
+  border: solid #ccc;
+
+  float: left;
+}
+#divfotoNoticias{
+  width: 48%;
+  display: inline-block;
+  text-align: left;
+  padding-bottom: 1%;
+  
+}
+#fotoNoticias{
+  width: 100%;
+}
+#divTituloParrafo{
+width: 48%;
+float: left;
+margin-left: 1%;
+text-align: justify;
+}
+#divTituloParrafoD{
+  width: 48%;
+  float: right;
+  margin-right: 1%;
+  text-align: justify;
+  }
+
+  /*HOMEPAGE*/
+#divHomePage{
+    margin: 1.5%;
+    width: 97%;
+    float: left;
+  }
+  /*
+  font-size: 20px;
+    line-height: 20px;
+    padding: 0 20px;
+    text-align: justify;
+    vertical-align: top;
+    width: 80%;
+    column-count: 3;
+    margin-left: auto;
+    margin-right: auto;
+  */
+  #divfotoNoticias{
+    width: 38%;
+    display: inline-block;
+    padding-bottom: 1%;
+    
+  }
+  #divParrafoNews{
+    width: 58%;
+    float: right;
+    margin-right: 1%;
+    text-align: justify;
+    column-count: 3;
+  }
+
+ #acordeon{
+   margin: 2%;
+
+ }

@@ -4,6 +4,8 @@ import SignUp from '../Pages/SignUp';
 import Contact from '../Pages/Contact';
 import HomePage from '../Pages/HomePage';
 import Information from '../Pages/Information';
+import editarUsuarios from '../Pages/editarUsuarios';
+import trabajadorSalud from '../Pages/trabajadorSalud';
 import News from '../Pages/News';
 
 import {
@@ -24,6 +26,8 @@ export default function AppRouter() {
         <Route  exact path="/"  component={HomePage}/>
         <Route   path="/news"  component={News}/>
         <Route   path="/information"  component={Information}/>
+        <Route   path="/editarUsuarios"  component={editarUsuarios}/>
+        <Route   path="/trabajadorSalud"  component={trabajadorSalud}/>
         <Route path="*">
             <h1>404 Not Found</h1>
         </Route>

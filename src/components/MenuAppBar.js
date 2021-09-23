@@ -24,8 +24,11 @@ import {
 
 const theme = createTheme({
   palette: {
-    secondary:{
-      main:"#ffa43a",
+    primary:{
+      main:"#525558",
+      light: "#75c7ff",
+      dark:"#759eff",
+      contrastText: "#ffa43a"
     }
   },
   
@@ -44,16 +47,16 @@ const useStyles = makeStyles((theme) => ({
 
 const listItems = [
   {
-    listText: "Home"
+    listText: "Aplicacion de Dosis"
   },
   {
-    listText: "Resume"
+    listText: "Administrador de usuarios"
   },
   {
-    listText: "Portfolio"
+    listText: "Administrador de nocitias"
   },
   {
-    listText: "Contacts"
+    listText: "Administrador de informacion"
   }
 ];
 //pruebaEND
@@ -100,7 +103,7 @@ export default function MenuAppBar() {
   };
 
   return (
-    
+    <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
 
       <AppBar position="static" color ="primary">
@@ -160,5 +163,6 @@ export default function MenuAppBar() {
         </Toolbar>
       </AppBar>
     </Box>
+    </ThemeProvider>
   );
 }

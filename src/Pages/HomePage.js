@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Carousel } from 'react-carousel-minimal';
-import HomePageComponent from '../components/homePageComponent';
+import HomePageComponent from '../components/HomePageComponent';
 
 export default function HomePage() {
     const data = [
@@ -65,7 +65,7 @@ export default function HomePage() {
           </div>
           
           <HomePageComponent />
-                
+          <HomePageComponent />
         </div>
       );
     }
