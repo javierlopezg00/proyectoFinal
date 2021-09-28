@@ -45,7 +45,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const listItems = [
+const usuarioLogeado = [
+  {
+    listText: "Perfil"
+  }
+];
+
+
+const administrador = [
   {
     listText: "Aplicacion de Dosis"
   },
@@ -59,10 +66,23 @@ const listItems = [
     listText: "Administrador de informacion"
   }
 ];
+
+const TrabajadorDeSalud = [
+  {
+    listText: "Aplicacion de Dosis"
+  },
+  {
+    listText: "Administrador de usuarios"
+  }
+];
 //pruebaEND
 
 
 export default function MenuAppBar() {
+
+  //Tomar datos del localStorage
+  const data = JSON.parse(localStorage.getItem('info'));
+  const usuario = data.tipoUsuario;
 
   //prueba
   const classes = useStyles();
@@ -76,14 +96,37 @@ export default function MenuAppBar() {
     <Box className={classes.menuSliderContainer} component="div">
       
       <List>
-        {listItems.map((listItem, index) => (
+       
+        {usuario === "UsuarioLogeado" &&
+        usuarioLogeado.map((listItem, index) => (
           <ListItem className={classes.listItem} button key={index}>
             <ListItemIcon className={classes.listItem}>
-              {listItem.listIcon}
+             
             </ListItemIcon>
             <ListItemText primary={listItem.listText} />
           </ListItem>
         ))}
+        {usuario === "Administrador" &&
+        administrador.map((listItem, index) => (
+        <ListItem className={classes.listItem} button key={index}>
+          <ListItemIcon className={classes.listItem}>
+           
+          </ListItemIcon>
+          <ListItemText primary={listItem.listText} />
+        </ListItem>
+      ))
+        }
+        {usuario === "TrabajadorDeSalud" &&
+        TrabajadorDeSalud.map((listItem, index) => (
+        <ListItem className={classes.listItem} button key={index}>
+          <ListItemIcon className={classes.listItem}>
+           
+          </ListItemIcon>
+          <ListItemText primary={listItem.listText} />
+        </ListItem>
+      ))
+        }
+      
       </List>
     </Box>
   );

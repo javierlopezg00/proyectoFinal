@@ -26,6 +26,17 @@ const enviarData = async (url,data)=>{
   console.log(resp);
   const json = await resp.json();
   console.log(json);
+
+  window.localStorage.setItem('info', JSON.stringify(json));
+  const usuario = JSON.parse(window.localStorage.getItem('info'));
+
+  const conexion = usuario.conectado;
+
+  if(conexion === true){
+    window.location.reload();
+   window.location.replace("/");
+  }
+
 }
 
 
