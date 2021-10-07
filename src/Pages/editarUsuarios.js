@@ -232,8 +232,14 @@ function App() {
           <br />
           <label>Enfermedad: </label>
           <br />
-          <input type="text" className="form-control" name="enfermedad" onChange={handleChange}/>
-          <br />
+          <select className="form-control" name="enfermedad" onChange={handleChange}>
+
+          <option>si</option>
+
+          <option>no</option>
+
+
+          </select>
           <label>Celular: </label>
           <br />
           <input type="text" className="form-control" name="celular" onChange={handleChange}/>
@@ -276,7 +282,13 @@ function App() {
           <br />
           <label>Enfermedad: </label>
           <br />
-          <input type="text" className="form-control" name="enfermedad" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.enfermedad}/>
+          <select className="form-control" name="enfermedad" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.enfermedad}>
+
+          <option>si</option>
+
+          <option>no</option>
+
+          </select>
           <br />
           <label>Celular: </label>
           <br />

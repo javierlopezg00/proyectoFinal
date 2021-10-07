@@ -10,7 +10,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import  Checkbox  from '@mui/material/Checkbox';
 
 const URL_REG = "http://localhost/ws-login/signUp.php";
 
@@ -157,7 +156,11 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <h4>Enfermedad Cronica<Checkbox name="enfermedad" value="on"/></h4> 
+                <h6>Enfermedad Cronica</h6>
+                <select className="form-control" name="enfermedad">
+              <option>si</option>
+              <option>no</option>
+          </select>
               </Grid>
             </Grid>
             <Button

@@ -33,8 +33,8 @@ const enviarData = async (url,data)=>{
   const conexion = usuario.conectado;
 
   if(conexion === true){
-    window.location.reload();
-   window.location.replace("/");
+    //window.location.reload();
+    //window.location.replace("/");
   }
 
 }

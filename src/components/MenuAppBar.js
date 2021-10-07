@@ -47,32 +47,39 @@ const useStyles = makeStyles((theme) => ({
 
 const usuarioLogeado = [
   {
-    listText: "Perfil"
+    listText: <a href="/perfil">Perfil</a>
+    
   }
 ];
 
 
 const administrador = [
   {
-    listText: "Aplicacion de Dosis"
+    listText: <a href="/perfil">Perfil</a>
   },
   {
-    listText: "Administrador de usuarios"
+    listText: <a href="/trabajadorSalud">Aplicacion de Dosis</a>
   },
   {
-    listText: "Administrador de nocitias"
+    listText: <a href="/editarUsuarios">Administrador de usuarios</a>
   },
   {
-    listText: "Administrador de informacion"
+    listText: <a href="/">Administrador de nocitias</a>
+  },
+  {
+    listText: <a href="/vacunas">Vacunas</a>
   }
 ];
 
-const TrabajadorDeSalud = [
+const trabajadorDeSalud = [
   {
-    listText: "Aplicacion de Dosis"
+    listText: <a href="/perfil">Perfil</a>
   },
   {
-    listText: "Administrador de usuarios"
+    listText: <a href="/trabajadorSalud">Aplicacion de Dosis</a>
+  },
+  {
+    listText: <a href="/editarUsuarios">Administrador de usuarios</a>
   }
 ];
 //pruebaEND
@@ -99,6 +106,7 @@ export default function MenuAppBar() {
        
         {usuario === "UsuarioLogeado" &&
         usuarioLogeado.map((listItem, index) => (
+          
           <ListItem className={classes.listItem} button key={index}>
             <ListItemIcon className={classes.listItem}>
              
@@ -117,7 +125,7 @@ export default function MenuAppBar() {
       ))
         }
         {usuario === "TrabajadorDeSalud" &&
-        TrabajadorDeSalud.map((listItem, index) => (
+        trabajadorDeSalud.map((listItem, index) => (
         <ListItem className={classes.listItem} button key={index}>
           <ListItemIcon className={classes.listItem}>
            

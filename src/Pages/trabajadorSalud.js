@@ -120,17 +120,7 @@ const filtrar=(terminoBusqueda)=>{
     })
   }
 
-  const peticionDelete=async()=>{
-    var f = new FormData();
-    f.append("METHOD", "DELETE");
-    await axios.post(baseUrl, f, {params: {dpi: usuarioSeleccionado.dpi}})
-    .then(response=>{
-      setData(data.filter(usuarios=>usuarios.dpi!==usuarioSeleccionado.dpi));
-      abrirCerrarModalEliminar();
-    }).catch(error=>{
-      console.log(error);
-    })
-  }
+ 
 
   const seleccionarUsuario=(usuarios, caso)=>{
     setusuarioSeleccionado(usuarios);

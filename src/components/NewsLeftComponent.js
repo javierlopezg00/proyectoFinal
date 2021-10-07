@@ -9,7 +9,7 @@ export default function NewsLeftComponent() {
     <div id="divNoticias">
     
     <div id="divfotoNoticias">
-        <img src={spiderman} id="fotoNoticias"/>
+        <img src={spiderman} id="fotoNoticias" alt="spiderman"/>
     </div>
         <div id="divTituloParrafo">
         <h1>Titulo</h1>

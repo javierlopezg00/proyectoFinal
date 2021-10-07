@@ -1,6 +1,5 @@
 import '../App.css';
 import * as React from 'react';
-import spiderman from '../img/spiderman.jpg'
 import NewsLeftComponent from '../components/NewsLeftComponent';
 import NewsRightComponent from '../components/NewsRightComponent';
 
