@@ -4,7 +4,7 @@ import {Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Box } from '@mui/system';
+
 const theme = createTheme({
     palette: {
       secondary:{
@@ -17,10 +17,10 @@ const theme = createTheme({
     
   });
 
-export default function Vacunas() {
+export default function CentrosVacunacion() {
     
 
-  const baseUrl="http://localhost:80/ws-login/editVacunas.php";
+  const baseUrl="http://localhost:80/ws-login/editCentrosVacunacion.php";
   const [data, setData]=useState([]);
 
 
@@ -34,8 +34,8 @@ export default function Vacunas() {
   const [vacunaSeleccionada, setvacunaSeleccionada]=useState({
     numero: '',
     nombre: '',
-    numeroDosis: '',
-    tiempoEntreDosis: ''
+    departamento: '',
+    direccion: ''
   });
 
 
@@ -76,8 +76,8 @@ export default function Vacunas() {
     var f = new FormData();
     f.append("numero", vacunaSeleccionada.numero);
     f.append("nombre", vacunaSeleccionada.nombre);
-    f.append("numeroDosis", vacunaSeleccionada.numeroDosis);
-    f.append("tiempoEntreDosis", vacunaSeleccionada.tiempoEntreDosis);
+    f.append("departamento", vacunaSeleccionada.departamento);
+    f.append("direccion", vacunaSeleccionada.direccion);
     f.append("METHOD", "POST");
     await axios.post(baseUrl, f)
     .then(response=>{
@@ -92,17 +92,17 @@ export default function Vacunas() {
     var f = new FormData();
     f.append("numero", vacunaSeleccionada.numero);
     f.append("nombre", vacunaSeleccionada.nombre);
-    f.append("numeroDosis", vacunaSeleccionada.numeroDosis);
-    f.append("tiempoEntreDosis", vacunaSeleccionada.tiempoEntreDosis);
+    f.append("departamento", vacunaSeleccionada.departamento);
+    f.append("direccion", vacunaSeleccionada.direccion);
     f.append("METHOD", "PUT");
     await axios.post(baseUrl, f, {params: {numero: vacunaSeleccionada.numero}})
     .then(response=>{
       var dataNueva= data;
-      dataNueva.map(vacunas=>{
-        if(vacunas.numero===vacunaSeleccionada.numero){
-          vacunas.nombre=vacunaSeleccionada.nombre;
-          vacunas.numeroDosis=vacunaSeleccionada.numeroDosis;
-          vacunas.tiempoEntreDosis=vacunaSeleccionada.tiempoEntreDosis;
+      dataNueva.map(centrosV=>{
+        if(centrosV.numero===vacunaSeleccionada.numero){
+          centrosV.nombre=vacunaSeleccionada.nombre;
+          centrosV.departamento=vacunaSeleccionada.departamento;
+          centrosV.direccion=vacunaSeleccionada.direccion;
         }
       });
       setData(dataNueva);
@@ -117,15 +117,15 @@ export default function Vacunas() {
     f.append("METHOD", "DELETE");
     await axios.post(baseUrl, f, {params: {numero: vacunaSeleccionada.numero}})
     .then(response=>{
-      setData(data.filter(vacunas=>vacunas.numero!==vacunaSeleccionada.numero));
+      setData(data.filter(centrosV=>centrosV.numero!==vacunaSeleccionada.numero));
       abrirCerrarModalEliminar();
     }).catch(error=>{
       console.log(error);
     })
   }
 
-  const seleccioanrVacuna=(vacunas, caso)=>{
-    setvacunaSeleccionada(vacunas);
+  const seleccioanrVacuna=(centrosV, caso)=>{
+    setvacunaSeleccionada(centrosV);
 
     (caso==="Editar")?
     abrirCerrarModalEditar():
@@ -138,40 +138,32 @@ export default function Vacunas() {
 
   return (
     <ThemeProvider theme={theme}>
-    <Box
-    sx={{
-      marginTop: 8,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    }}
-  >
     <div style={{textAlign: 'center'}}>
 <br />
-        <h1>Vacunas</h1>
+        <h1>Centros de Vacunacion</h1>
       <Button color="secondary" onClick={()=>abrirCerrarModalInsertar()}>Insertar</Button>
       <br /><br />
     <table className="table table-striped">
       <thead>
         <tr>
         <th>Identificacion:</th>
-          <th>Vacuna:</th>
-          <th>Numero de Dosis:</th>
-          <th>Tiempo entre dosis(dias):</th>
+          <th>Nombre del centro:</th>
+          <th>Departamento:</th>
+          <th>Dirrecion:</th>
           <th>Acciones:</th>
 
         </tr>
       </thead>
       <tbody>
-        {data.map(vacunas=>(
-          <tr key={vacunas.numero}>
-            <td>{vacunas.numero}</td>
-            <td>{vacunas.nombre}</td>
-            <td>{vacunas.numeroDosis}</td>
-            <td>{vacunas.tiempoEntreDosis}</td>
+        {data.map(centrosV=>(
+          <tr key={centrosV.numero}>
+            <td>{centrosV.numero}</td>
+            <td>{centrosV.nombre}</td>
+            <td>{centrosV.departamento}</td>
+            <td>{centrosV.direccion}</td>
           <td>
-          <Button color="secondary"  onClick={()=>seleccioanrVacuna(vacunas, "Editar")}>Editar</Button> {"  "}
-          <Button color="secondary" onClick={()=>seleccioanrVacuna(vacunas, "Eliminar")}>Eliminar</Button>
+          <Button color="secondary"  onClick={()=>seleccioanrVacuna(centrosV, "Editar")}>Editar</Button> {"  "}
+          <Button color="secondary" onClick={()=>seleccioanrVacuna(centrosV, "Eliminar")}>Eliminar</Button>
           </td>
           </tr>
         ))}
@@ -183,7 +175,7 @@ export default function Vacunas() {
 
 
     <Modal isOpen={modalInsertar}>
-      <ModalHeader>Insertar Nueva Vacuna</ModalHeader>
+      <ModalHeader>Insertar Nueva Centro de vacunacion</ModalHeader>
       <ModalBody>
         <div className="form-group">
        
@@ -192,17 +184,17 @@ export default function Vacunas() {
         <input type="text" className="form-control" name="numero" onChange={handleChange}/>
         <br />
             
-          <label>Vacuna: </label>
+          <label>Nombre del centro: </label>
           <br />
           <input type="text" className="form-control" name="nombre" onChange={handleChange}/>
           <br />
-          <label>Numero de Dosis: </label>
+          <label>Departamento: </label>
           <br />
-          <input type="text" className="form-control" name="numeroDosis" onChange={handleChange}/>
+          <input type="text" className="form-control" name="departamento" onChange={handleChange}/>
           <br />
-          <label>Tiempo entre dosis(dias): </label>
+          <label>Dirrecion: </label>
           <br />
-          <input type="text" className="form-control" name="tiempoEntreDosis" onChange={handleChange}/>
+          <input type="text" className="form-control" name="direccion" onChange={handleChange}/>
           <br />
         </div>
       </ModalBody>
@@ -215,20 +207,20 @@ export default function Vacunas() {
 
     
     <Modal isOpen={modalEditar}>
-      <ModalHeader>Editar Vacuna</ModalHeader>
+      <ModalHeader>Editar centro de Vacunacion</ModalHeader>
       <ModalBody>
         <div className="form-group"> 
-        <label>Vacuna: </label>
+        <label>Nombre del centro: </label>
           <br />
           <input type="text" className="form-control" name="nombre" onChange={handleChange} value={vacunaSeleccionada && vacunaSeleccionada.nombre}/>
           <br />
-          <label>Numero de dosis: </label>
+          <label>Departamento: </label>
           <br />
-          <input type="text" className="form-control" name="numeroDosis" onChange={handleChange} value={vacunaSeleccionada && vacunaSeleccionada.numeroDosis}/>
+          <input type="text" className="form-control" name="departamento" onChange={handleChange} value={vacunaSeleccionada && vacunaSeleccionada.departamento}/>
           <br />
-          <label>Tiempo entre dosis(dias) </label>
+          <label>Dirrecion </label>
           <br />
-          <input type="text" className="form-control" name="tiempoEntreDosis" onChange={handleChange} value={vacunaSeleccionada && vacunaSeleccionada.tiempoEntreDosis}/>
+          <input type="text" className="form-control" name="direccion" onChange={handleChange} value={vacunaSeleccionada && vacunaSeleccionada.direccion}/>
           <br />   
         </div>
       </ModalBody>
@@ -239,7 +231,7 @@ export default function Vacunas() {
     </Modal>
     <Modal isOpen={modalEliminar}>
         <ModalBody>
-        ¿Estás seguro que deseas eliminar la vacuna {vacunaSeleccionada && vacunaSeleccionada.nombre}?
+        ¿Estás seguro que deseas eliminar la centroV {vacunaSeleccionada && vacunaSeleccionada.nombre}?
         </ModalBody>
         <ModalFooter>
           <Button color="secondary"   onClick={()=>peticionDelete()}>
@@ -255,7 +247,6 @@ export default function Vacunas() {
       </Modal>
 
     </div>
-    </Box>
     </ThemeProvider>
   );
 }

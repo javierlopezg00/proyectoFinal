@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Box from '@mui/material/Box';
 
 export default function Profile() {
 
@@ -6,6 +7,12 @@ export default function Profile() {
 
     return (
         <div>
+        <Box
+            sx={{
+              marginTop: 8,
+              
+            }}
+          >
         <div id="contenedoresPerfil">
         <div id="contenedorPerfil">
             <h1>Datos del usuario</h1>
@@ -25,6 +32,7 @@ export default function Profile() {
             <h4>Vacuna: </h4><p>{data.vacuna}</p>
         </div>
         </div>
+        </Box>
         </div>
     )
 }

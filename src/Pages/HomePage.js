@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Carousel } from 'react-carousel-minimal';
 import HomePageComponent from '../components/HomePageComponent';
+import Box from '@mui/material/Box';
 
 export default function HomePage() {
     const data = [
@@ -32,6 +33,14 @@ export default function HomePage() {
       }
       return (
         <div className="App">
+        <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
           <div style={{ textAlign: "center" }}>
             <div style={{
               padding: "0 20px"
@@ -66,6 +75,7 @@ export default function HomePage() {
           
           <HomePageComponent />
           <HomePageComponent />
+          </Box>
         </div>
       );
     }

@@ -1,4 +1,4 @@
-import '../App.css';
+import '../App.scss';
 import * as React from 'react';
 import spiderman from '../img/spiderman.jpg'
 

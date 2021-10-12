@@ -9,6 +9,9 @@ import trabajadorSalud from '../Pages/trabajadorSalud';
 import Profile from '../Pages/Profile';
 import News from '../Pages/News';
 import Vacunas from '../Pages/Vacunas';
+import CargaMasivaUsuario from '../Pages/CargaMasivaUsuario';
+import CentrosVacunacion from '../Pages/centrosVacunacion';
+import ValidarVacunacion from '../Pages/ValidarVacunacion';
 
 import {
     BrowserRouter as Router,
@@ -16,6 +19,7 @@ import {
     Route
   } from "react-router-dom";
 import MenuAppBar from '../components/MenuAppBar';
+import Footer from '../components/Footer';
 
 export default function AppRouter() {
     return (
@@ -32,10 +36,14 @@ export default function AppRouter() {
         <Route   path="/trabajadorSalud"  component={trabajadorSalud}/>
         <Route   path="/perfil"  component={Profile}/>
         <Route   path="/vacunas"  component={Vacunas}/>
+        <Route   path="/cargaUsuarios"  component={CargaMasivaUsuario}/>
+        <Route   path="/centrosVacunacion"  component={CentrosVacunacion}/>
+        <Route   path="/ValidarVacunacion"  component={ValidarVacunacion}/>
         <Route path="*">
             <h1>404 Not Found</h1>
         </Route>
     </Switch>   
+    <Footer/>
 </Router>     
     )
 }

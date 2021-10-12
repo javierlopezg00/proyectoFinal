@@ -4,6 +4,7 @@ import {Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 //Temas personalizado
 const theme = createTheme({
   palette: {
@@ -41,7 +42,8 @@ function App() {
     fecha_de_nacimiento: '',
     enfermedad: '',
     celular: '',
-    tipoUsuario: ''
+    tipoUsuario: '',
+    grupoPrioritario: ''
   });
 
 
@@ -87,6 +89,7 @@ function App() {
     f.append("clave", usuarioSeleccionado.clave);
     f.append("fecha_de_nacimiento", usuarioSeleccionado.fecha_de_nacimiento);
     f.append("enfermedad", usuarioSeleccionado.enfermedad);
+    f.append("grupoPrioritario", usuarioSeleccionado.grupoPrioritario);
     f.append("celular", usuarioSeleccionado.celular);
     f.append("METHOD", "POST");
     await axios.post(baseUrl, f)
@@ -107,6 +110,7 @@ function App() {
     f.append("clave", usuarioSeleccionado.clave);
     f.append("fecha_de_nacimiento", usuarioSeleccionado.fecha_de_nacimiento);
     f.append("enfermedad", usuarioSeleccionado.enfermedad);
+    f.append("grupoPrioritario", usuarioSeleccionado.grupoPrioritario)
     f.append("celular", usuarioSeleccionado.celular);
     f.append("tipoUsuario", usuarioSeleccionado.tipoUsuario);
     f.append("METHOD", "PUT");
@@ -121,6 +125,7 @@ function App() {
           usuarios.clave=usuarioSeleccionado.clave;
           usuarios.fecha_de_nacimiento=usuarioSeleccionado.fecha_de_nacimiento;
           usuarios.enfermedad=usuarioSeleccionado.enfermedad;
+          usuarios.grupoPrioritario=usuarioSeleccionado.grupoPrioritario;
           usuarios.celular=usuarioSeleccionado.celular;
           usuarios.tipoUsuario=usuarioSeleccionado.tipoUsuario;
         }
@@ -158,6 +163,14 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+    <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
     <div style={{textAlign: 'center'}}>
 <br />
       <Button color="secondary" onClick={()=>abrirCerrarModalInsertar()}>Insertar</Button>
@@ -172,6 +185,7 @@ function App() {
           <th>Clave</th>
           <th>Fecha de nacimiento</th>
           <th>Enfermedad</th>
+          <th>grupoPrioritario</th>
           <th>Celular</th>
           <th>Tipo Usuario</th>
           <th>Acciones</th>
@@ -187,6 +201,7 @@ function App() {
             <td>{usuarios.clave}</td>
             <td>{usuarios.fecha_de_nacimiento}</td>
             <td>{usuarios.enfermedad}</td>
+            <td>{usuarios.grupoPrioritario}</td>
             <td>{usuarios.celular}</td>
             <td>{usuarios.tipoUsuario}</td>
           <td>
@@ -222,6 +237,10 @@ function App() {
           <br />
           <input type="text" className="form-control" name="correo" onChange={handleChange}/>
           <br />
+          <label>Celular: </label>
+          <br />
+          <input type="text" className="form-control" name="celular" onChange={handleChange}/>
+          <br />
           <label>Clave: </label>
           <br />
           <input type="password" className="form-control" name="clave" onChange={handleChange}/>
@@ -233,17 +252,19 @@ function App() {
           <label>Enfermedad: </label>
           <br />
           <select className="form-control" name="enfermedad" onChange={handleChange}>
-
-          <option>si</option>
-
+          <option>null</option>
           <option>no</option>
-
-
+          <option>si</option>
           </select>
-          <label>Celular: </label>
           <br />
-          <input type="text" className="form-control" name="celular" onChange={handleChange}/>
+          <label>Grupo Prioritario: </label>
           <br />
+          <select className="form-control" name="grupoPrioritario" onChange={handleChange}>
+          <option>null</option>
+          <option>no</option>
+          <option>si</option>
+          </select>
+          
         </div>
       </ModalBody>
       <ModalFooter>
@@ -272,6 +293,10 @@ function App() {
           <br />
           <input type="text" className="form-control" name="correo" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.correo}/>
           <br />
+          <label>Celular: </label>
+          <br />
+          <input type="text" className="form-control" name="celular" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.celular}/>
+          <br />
           <label>Clave: </label>
           <br />
           <input type="password" className="form-control" name="clave" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.clave}/>
@@ -283,20 +308,21 @@ function App() {
           <label>Enfermedad: </label>
           <br />
           <select className="form-control" name="enfermedad" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.enfermedad}>
-
-          <option>si</option>
-
+          <option>null</option>
           <option>no</option>
-
+          <option>si</option>
           </select>
           <br />
-          <label>Celular: </label>
+          <label>Grupo Prioritario: </label>
           <br />
-          <input type="text" className="form-control" name="celular" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.celular}/>
-          <br />
+          <select className="form-control" name="grupoPrioritario" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.grupoPrioritario}>
+          <option>null</option>
+          <option>no</option>
+          <option>si</option>
+          </select>
+         
           <label>Tipo Usuario: </label>
           <br />
-  
           <select name="tipoUsuario" onChange={handleChange} value={usuarioSeleccionado && usuarioSeleccionado.tipoUsuario}>
 
           <option>UsuarioLogeado</option>
@@ -333,6 +359,7 @@ function App() {
       </Modal>
 
     </div>
+    </Box>
     </ThemeProvider>
   );
 }

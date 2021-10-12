@@ -5,12 +5,21 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HomePageComponent from '../components/HomePageComponent';
+import Box from '@mui/material/Box';
 
 export default function SimpleAccordion() {
   return (
     
     
     <div id = 'acordeon'>
+    <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
     <h1>Informacion</h1>
 
       <Accordion sx={{ width: 4/5 }}>
@@ -39,7 +48,7 @@ export default function SimpleAccordion() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      
+      </Box>
     </div>
   );
 }

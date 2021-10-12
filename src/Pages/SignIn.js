@@ -77,8 +77,6 @@ export default function SignIn() {
       };
       console.log(datos);
       enviarData(URL_LOGIN,datos);
-      
-
   }
 
   return (

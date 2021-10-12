@@ -1,4 +1,5 @@
-import * as React from 'react';
+
+import React, {useState, useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,6 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 const URL_REG = "http://localhost/ws-login/signUp.php";
 
@@ -52,18 +54,35 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
       const datos = {
+        "dpi": data.get('dpi'),
         "nombre": data.get('nombre'),
         "apellido": data.get('apellido'),
-        "dpi": data.get('dpi'),
-        "clave": data.get('clave'),
         "correo": data.get('correo'),
-        "celular": data.get('celular'),
+        "clave": data.get('clave'),
         "fecha_de_nacimiento": data.get('fecha_de_nacimiento'),
-        "enfermedad": data.get('enfermedad')
+        "enfermedad": data.get('enfermedad'),
+        "celular": data.get('celular'),
+        "grupoPrioritario": data.get('grupoPrioritario'),
+        "centroVacunacionE": data.get('centroVacunacionE')
       };
       console.log(datos);
       enviarData(URL_REG, datos);
   }
+
+  const [data, setData]=useState([]);
+  const baseUrlCentrosV="http://localhost:80/ws-login/editCentrosVacunacion.php";
+  const peticionGet=async()=>{
+    await axios.get(baseUrlCentrosV)
+    .then(response=>{
+      setData(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+
+  useEffect(()=>{
+    peticionGet();
+  },[])
 
   return (
     <div>
@@ -78,9 +97,6 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
             Registrate
           </Typography>
@@ -158,9 +174,27 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <h6>Enfermedad Cronica</h6>
                 <select className="form-control" name="enfermedad">
+                <option>null</option>
+                <option>no</option>
               <option>si</option>
-              <option>no</option>
           </select>
+              </Grid>
+              <Grid item xs={12}>
+                <h6>Grupo Prioritario</h6>
+                <select className="form-control" name="grupoPrioritario">
+              <option>null</option>
+              <option>no</option>
+              <option>si</option>
+          </select>
+              </Grid>
+              <Grid item xs={12}>
+                <h6>Centro de vacunacion</h6>
+                <select className="form-control" name="centroVacunacionE"> 
+                  {data.map(centrosV=>(
+                      <option>{centrosV.nombre}</option>
+                  ))}
+                </select>
+              
               </Grid>
             </Grid>
             <Button

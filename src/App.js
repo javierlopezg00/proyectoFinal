@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { createTheme ,ThemeProvider } from '@mui/material/styles';
 import AppRouter from './routers/AppRouter';
 

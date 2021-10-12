@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import Container from '@mui/material/Container';
+
 //Temas personalizado
 const theme = createTheme({
   palette: {
@@ -19,6 +20,7 @@ const theme = createTheme({
   },
   
 });
+
 
 function App() {
 
@@ -136,6 +138,14 @@ const filtrar=(terminoBusqueda)=>{
 
   return (
     <ThemeProvider theme={theme}>
+    <Box
+    sx={{
+      marginTop: 8,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}
+  >
     <div style={{textAlign: 'center'}}>
 <br />
 <Container component="main" maxWidth="xs">
@@ -244,6 +254,7 @@ const filtrar=(terminoBusqueda)=>{
   
 
     </div>
+    </Box>
     </ThemeProvider>
   );
 }

@@ -68,6 +68,12 @@ const administrador = [
   },
   {
     listText: <a href="/vacunas">Vacunas</a>
+  },
+  {
+    listText: <a href="/cargaUsuarios">Cargar Usuarios</a>
+  },
+  {
+    listText: <a href="/ValidarVacunacion">Validar Vacunacion</a>
   }
 ];
 
@@ -155,9 +161,8 @@ export default function MenuAppBar() {
 
   return (
     <ThemeProvider theme={theme}>
-    <Box sx={{ flexGrow: 1 }}>
-
-      <AppBar position="static" color ="primary">
+    <Box sx={{ flexGrow: 1 }} class="header">
+      <AppBar position="static" color ="primary" >
         <Toolbar>
           <IconButton
             size="large"
