@@ -20,12 +20,13 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,PUT,POST,DELETE");
     $clave =	$dataObject-> clave;
     $celular =	$dataObject-> celular;
     $fecha_de_nacimiento =	$dataObject-> fecha_de_nacimiento;
+    $centroVacunacionE = $dataObject -> centroVacunacionE;
     $enfermedad = $dataObject -> enfermedad;
+    $grupoPrioritario = $dataObject -> grupoPrioritario;
     $tipoUsuario = "UsuarioLogeado";
-    $primerDosis = date('Y-m-d+7');
 
-    $fechaActual = date('Y-m-d');
-    $primerDosis = date('Y-m-d',strtotime($fechaActual."+ 7 day"));
+
+   
     //$segundaDosis = date('Y-m-d',strtotime($fechaActual."+ 3 month"));
 
     //$sql = $mysqli->prepare("CALL insertar(?,?,?,?,?,?,?,?,?)");
@@ -34,7 +35,7 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,PUT,POST,DELETE");
     //$sql = "INSERT INTO usuarios (dpi, nombre, apellido, correo, clave, fecha_de_nacimiento, enfermedad, celular)
     //VALUES ('$dpi', '$nombre', '$apellido', '$correo', '$clave', '$fecha_de_nacimiento','$enfermedad', '$celular');";
     
-    $sql = "call fechaUsuario('$dpi','$nombre','$apellido','$correo', '$clave', '$fecha_de_nacimiento', '$enfermedad', '$celular', '$tipoUsuario')";
+    $sql = "call fechaUsuario('$dpi','$nombre','$apellido','$correo', '$clave', '$fecha_de_nacimiento', '$enfermedad', '$celular', '$tipoUsuario', '$grupoPrioritario', '$centroVacunacionE')";
 
 
     $result = mysqli_query($mysqli,$sql);

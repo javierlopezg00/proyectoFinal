@@ -30,12 +30,11 @@ if($_POST['METHOD']=='POST'){
     $enfermedad=$_POST['enfermedad'];
     $celular=$_POST['celular'];
     $tipoUsuario = 'UsuarioLogeado';
-    
-
     $fechaActual = date('Y-m-d');
     $primerDosis = date('Y-m-d',strtotime($fechaActual."+ 7 day"));
+    $grupoPrioritario=$_POST['grupoPrioritario'];
 
-    $query="call fechaUsuario('$dpi','$nombre','$apellido','$correo', '$clave', '$fecha_de_nacimiento', '$enfermedad', '$celular', '$tipoUsuario','$primerDosis')";
+    $query="call fechaUsuario('$dpi','$nombre','$apellido','$correo', '$clave', '$fecha_de_nacimiento', '$enfermedad', '$celular', '$tipoUsuario','$grupoPrioritario', 'hola')";
     $resultado=metodoPost($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");
@@ -53,7 +52,8 @@ if($_POST['METHOD']=='PUT'){
     $enfermedad=$_POST['enfermedad'];
     $celular=$_POST['celular'];
     $tipoUsuario = $_POST['tipoUsuario'];
-    $query="UPDATE usuarios SET nombre='$nombre', apellido='$apellido', correo='$correo', clave='$clave', fecha_de_nacimiento='$fecha_de_nacimiento', enfermedad='$enfermedad', celular='$celular', tipoUsuario = '$tipoUsuario' WHERE dpi='$dpi'";
+    $grupoPrioritario=$_POST['grupoPrioritario'];
+    $query="call updateUsuario('$nombre','$apellido','$correo','$clave','$fecha_de_nacimiento','$enfermedad','$celular','$tipoUsuario','$grupoPrioritario','$dpi')";
     $resultado=metodoPut($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");

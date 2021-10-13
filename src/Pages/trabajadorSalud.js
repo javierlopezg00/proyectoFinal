@@ -93,6 +93,20 @@ const filtrar=(terminoBusqueda)=>{
     })
   }
 
+  const [datas, setDatas]=useState([]);
+  const baseUrlVacunas="http://localhost:80/ws-login/vacunasDinamicas.php";
+  const peticionGet2=async()=>{
+    await axios.get(baseUrlVacunas)
+    .then(response=>{
+      setDatas(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+
+  useEffect(()=>{
+    peticionGet2();
+  },[])
 
 
   const peticionPut=async()=>{
@@ -212,24 +226,13 @@ const filtrar=(terminoBusqueda)=>{
 
         <label>Vacuna: </label>
         <br />
-          <select name="vacuna" onChange={handleChange2} value={usuarioSeleccionado && usuarioSeleccionado.vacuna}>
-
-          <option>null</option>
-
-          <option>Sputnik</option>
-
-          <option>Moderna</option>
-
-          <option>Astrazeneca</option>
-
-          </select>
+          <select name="vacuna" onChange={handleChange2} value={usuarioSeleccionado && usuarioSeleccionado.vacuna}> 
+                  {datas.map(vacuna=>(
+                      <option>{vacuna.nombre}</option>
+                  ))}
+                </select>
           <br />
           <br />
-          <label>Fecha Dosis 2: </label>
-          <br />
-          <input type="date"  className="form-control" name="segundaDosis" onChange={handleChange2} value={usuarioSeleccionado && usuarioSeleccionado.segundaDosis}/>
-          <br />
-          
           <label>Dosis 1 colocada: </label><br/>
           <select name="primerDosisPuesta" onChange={handleChange2} value={usuarioSeleccionado && usuarioSeleccionado.primerDosisPuesta}>
           <option>No</option>
