@@ -15,7 +15,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 	$usuario = $dataObject-> dpi;
 	$pas =	$dataObject-> clave;
     
-  if ($nueva_consulta = $mysqli->prepare("SELECT *  FROM datosusuarios WHERE dpi = ?")) {
+  if ($nueva_consulta = $mysqli->prepare("SELECT *  FROM datosUsuarios WHERE dpi = ?")) {
         $nueva_consulta->bind_param('s', $usuario);
         $nueva_consulta->execute();
         $resultado = $nueva_consulta->get_result();
@@ -28,11 +28,11 @@ $method = $_SERVER['REQUEST_METHOD'];
                 echo json_encode(array('conectado'=>true,'dpi'=>$datos['dpi'], 'nombre'=>$datos['nombre'], 
                  'apellido'=>$datos['apellido'], 'correo'=>$datos['correo'],'clave'=>$datos['clave'], 
                  'fecha_de_nacimiento'=>$datos['fecha_de_nacimiento'] ,'enfermedad'=>$datos['enfermedad'], 
-                 'celular'=>$datos['celular'], 'tipoUsuario'=>$datos['tipoUsuario'], 
-                 'primerDosis'=>$datos['primerDosis'], 'segundaDosis'=>$datos['segundaDosis'], 
-                 'vacuna'=>$datos['vacuna'],
-                 'primerDosisPuesta'=>$datos['primerDosisPuesta'],
-                 'segundaDosisPuesta'=>$datos['segundaDosisPuesta'] ) );
+                 'celular'=>$datos['celular'], 'tipoUsuario'=>$datos['tipoUsuario'], 'grupoPrioritario'=>$datos['grupoPrioritario']
+                 , 'centroVacunacionE'=>$datos['centroVacunacionE'], 'primerDosis'=>$datos['primerDosis']
+                 , 'segundaDosis'=>$datos['segundaDosis'], 'validado'=>$datos['validado'], 'primerDosisPuesta'=>$datos['primerDosisPuesta']
+                 , 'segundaDosisPuesta'=>$datos['segundaDosisPuesta'], 'vacuna'=>$datos['vacuna']
+                  ) );
               }
 
                else {

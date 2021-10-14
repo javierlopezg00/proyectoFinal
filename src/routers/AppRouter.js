@@ -12,6 +12,7 @@ import Vacunas from '../Pages/Vacunas';
 import CargaMasivaUsuario from '../Pages/CargaMasivaUsuario';
 import CentrosVacunacion from '../Pages/centrosVacunacion';
 import ValidarVacunacion from '../Pages/ValidarVacunacion';
+import AdministradorNoticias from '../Pages/AdministradorNoticias'
 
 import {
     BrowserRouter as Router,
@@ -39,6 +40,7 @@ export default function AppRouter() {
         <Route   path="/cargaUsuarios"  component={CargaMasivaUsuario}/>
         <Route   path="/centrosVacunacion"  component={CentrosVacunacion}/>
         <Route   path="/ValidarVacunacion"  component={ValidarVacunacion}/>
+        <Route   path="/AdministradorNoticias"  component={AdministradorNoticias}/>
         <Route path="*">
             <h1>404 Not Found</h1>
         </Route>

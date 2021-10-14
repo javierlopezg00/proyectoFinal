@@ -10,7 +10,9 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{
-        $query="SELECT * FROM usuarios INNER JOIN fechavacunacion ON usuarios.dpi = fechavacunacion.dpi INNER JOIN usuariovacunado ON fechavacunacion.dpi = usuariovacunado.dpi";
+        $query="SELECT * FROM usuarios INNER JOIN fechavacunacion ON usuarios.dpi = fechavacunacion.dpi 
+        INNER JOIN usuariovacunado ON fechavacunacion.dpi = usuariovacunado.dpi
+        inner join vacunacolocada on fechavacunacion.dpi = vacunacolocada.dpi;";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetchAll()); 
     }

@@ -64,7 +64,7 @@ const administrador = [
     listText: <a href="/editarUsuarios">Administrador de usuarios</a>
   },
   {
-    listText: <a href="/">Administrador de nocitias</a>
+    listText: <a href="/AdministradorNoticias">Administrador de nocitias</a>
   },
   {
     listText: <a href="/vacunas">Vacunas</a>
@@ -159,6 +159,20 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const cerrarSesion = () =>{
+    localStorage.clear();
+    var anonimo = {
+        conectado: false,
+        dpi: '',
+        nombre: '',
+        apellido: '',
+        fecha_de_nacimiento: '',
+        tipoUsuario: ''
+    }
+    window.localStorage.setItem('info', JSON.stringify(anonimo));
+    window.location.reload();
+    window.location.replace('/');
+  }
   return (
     <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }} class="header">
@@ -183,7 +197,7 @@ export default function MenuAppBar() {
           <Drawer open={open} anchor="right" onClose={toggleSlider}>
               {sideList()}
             </Drawer>
-          {auth && (
+          {usuario == '' &&  (
             <div>
               <IconButton
                 size="large"
@@ -216,6 +230,73 @@ export default function MenuAppBar() {
                   </div>
                   
           )}
+          {usuario == 'Administrador' || usuario == 'UsuarioLogeado' &&  (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+              <MenuItem onClick={cerrarSesion}>Cerrar Sesion</MenuItem>
+              
+              </Menu>
+                  </div>
+                  
+          )}
+          {usuario == 'TrabajadorDeSalud'  &&  (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+              <MenuItem onClick={cerrarSesion}>Cerrar Sesion</MenuItem>
+              
+              </Menu>
+                  </div>
+                  
+          )}
+          
         </Toolbar>
       </AppBar>
     </Box>

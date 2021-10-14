@@ -37,13 +37,14 @@ function App() {
     dpi: '',
     nombre: '',
     apellido: '',
-    correo: '',
+    correo: '', 
     clave: '',
     fecha_de_nacimiento: '',
     enfermedad: '',
     celular: '',
     tipoUsuario: '',
-    grupoPrioritario: ''
+    grupoPrioritario: '',
+    centro: ''
   });
 
 
@@ -91,6 +92,7 @@ function App() {
     f.append("enfermedad", usuarioSeleccionado.enfermedad);
     f.append("grupoPrioritario", usuarioSeleccionado.grupoPrioritario);
     f.append("celular", usuarioSeleccionado.celular);
+    f.append("centro", usuarioSeleccionado.centro);
     f.append("METHOD", "POST");
     await axios.post(baseUrl, f)
     .then(response=>{
@@ -159,6 +161,21 @@ function App() {
 
   useEffect(()=>{
     peticionGet();
+  },[])
+
+  //Obtener centros de vacunacion
+  const [datas, setDatas]=useState([]);
+  const baseUrlVacunas="http://localhost:80/ws-login/centrosVDinamicos.php";
+  const peticionGet2=async()=>{
+    await axios.get(baseUrlVacunas)
+    .then(response=>{
+      setDatas(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+  useEffect(()=>{
+    peticionGet2();
   },[])
 
   return (
@@ -264,7 +281,15 @@ function App() {
           <option>no</option>
           <option>si</option>
           </select>
-          
+          <label>Vacuna: </label>
+        <br />
+          <select name="centro" className="form-control" onChange={handleChange}> 
+          <option>null</option>
+                  {datas.map(centro=>(
+                      <option>{centro.nombre}</option>
+                  ))}
+                </select>
+          <br />
         </div>
       </ModalBody>
       <ModalFooter>
@@ -343,7 +368,7 @@ function App() {
 
     <Modal isOpen={modalEliminar}>
         <ModalBody>
-        ¿Estás seguro que deseas eliminar el usuarios {usuarioSeleccionado && usuarioSeleccionado.nombre}?
+        ¿Estás seguro que deseas eliminar el usuario {usuarioSeleccionado && usuarioSeleccionado.nombre}?
         </ModalBody>
         <ModalFooter>
           <Button color="secondary"   onClick={()=>peticionDelete()}>

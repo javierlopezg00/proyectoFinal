@@ -93,6 +93,7 @@ const filtrar=(terminoBusqueda)=>{
     })
   }
 
+  //obtenerVacunas
   const [datas, setDatas]=useState([]);
   const baseUrlVacunas="http://localhost:80/ws-login/vacunasDinamicas.php";
   const peticionGet2=async()=>{
@@ -103,7 +104,6 @@ const filtrar=(terminoBusqueda)=>{
       console.log(error);
     })
   }
-
   useEffect(()=>{
     peticionGet2();
   },[])

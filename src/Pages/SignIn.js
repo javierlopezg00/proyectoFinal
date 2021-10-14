@@ -21,7 +21,7 @@ const enviarData = async (url,data)=>{
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json'
-    }
+    } 
   });
   console.log(resp);
   const json = await resp.json();
@@ -33,8 +33,8 @@ const enviarData = async (url,data)=>{
   const conexion = usuario.conectado;
 
   if(conexion === true){
-    //window.location.reload();
-    //window.location.replace("/");
+    window.location.reload();
+    window.location.replace("/perfil");
   }
 
 }
