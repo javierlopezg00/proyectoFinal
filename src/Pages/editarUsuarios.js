@@ -5,6 +5,7 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 //Temas personalizado
 const theme = createTheme({
   palette: {
@@ -21,7 +22,7 @@ const theme = createTheme({
 function App() {
 
 
-
+  const [busqueda, setBusqueda]= useState("");
   const baseUrl="http://localhost:80/ws-login/editMethod.php";
   const [data, setData]=useState([]);
 
@@ -31,6 +32,7 @@ function App() {
   const [modalInsertar, setModalInsertar]= useState(false);
   const [modalEditar, setModalEditar]= useState(false);
   const [modalEliminar, setModalEliminar]= useState(false);
+  const [tablaUsuarios, setTablaUsuarios]= useState([]);
 
 
   const [usuarioSeleccionado, setusuarioSeleccionado]=useState({
@@ -47,6 +49,21 @@ function App() {
     centro: ''
   });
 
+//filtrart
+const handleChange2=e=>{
+  setBusqueda(e.target.value);
+  filtrar(e.target.value);
+} 
+
+const filtrar=(terminoBusqueda)=>{
+  var resultadosBusqueda=tablaUsuarios.filter((elemento)=>{
+    if(elemento.dpi.includes(terminoBusqueda)
+    ){
+      return elemento;
+    }
+  });
+  setData(resultadosBusqueda);
+}
 
 //Capturar informacion de los imputs
   const handleChange=e=>{
@@ -75,6 +92,7 @@ function App() {
     await axios.get(baseUrl)
     .then(response=>{
       setData(response.data);
+      setTablaUsuarios(response.data);
     }).catch(error=>{
       console.log(error);
     })
@@ -190,6 +208,15 @@ function App() {
         >
     <div style={{textAlign: 'center'}}>
 <br />
+        <h1>Administrar Usuarios</h1>
+        <TextField
+        margin="normal"
+        required
+        fullWidth
+        label="DPI"
+        value={busqueda}
+        onChange ={handleChange2}
+        />
       <Button color="secondary" onClick={()=>abrirCerrarModalInsertar()}>Insertar</Button>
       <br /><br />
     <table className="table table-striped">

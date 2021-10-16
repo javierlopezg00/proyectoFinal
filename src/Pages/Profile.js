@@ -5,6 +5,7 @@ export default function Profile() {
 
     const data = JSON.parse(localStorage.getItem('info'));
 
+
     return (
         <div>
         <Box
@@ -14,6 +15,8 @@ export default function Profile() {
             }}
           >
         <div id="contenedoresPerfil">
+        <br/>
+        <h4>{data.saludo}</h4>
         <div id="contenedorPerfil">
             <h1>Datos Personales</h1>
             <h4>Tipo de usuario: </h4> <p>{data.tipoUsuario}</p>
@@ -27,6 +30,7 @@ export default function Profile() {
         </div>
         <div id="contenedorPerfil">
             <h1>Datos del Vacunacion</h1>
+            <h4>Valido para vacunacion: </h4>{data.validado}<p></p>
             <h4>Fecha Primer Dosis: </h4> <p>{data.primerDosis}</p>
             <h4>Fecha Segunda Dosis: </h4><p>{data.segundaDosis}</p>
             <h4>Centro De Vacunacion: </h4><p>{data.centroVacunacionE}</p>

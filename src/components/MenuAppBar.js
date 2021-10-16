@@ -230,7 +230,7 @@ export default function MenuAppBar() {
                   </div>
                   
           )}
-          {usuario == 'Administrador' || usuario == 'UsuarioLogeado' &&  (
+          {usuario == 'Administrador'  &&  (
             <div>
               <IconButton
                 size="large"
@@ -264,6 +264,39 @@ export default function MenuAppBar() {
                   
           )}
           {usuario == 'TrabajadorDeSalud'  &&  (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+              <MenuItem onClick={cerrarSesion}>Cerrar Sesion</MenuItem>
+              
+              </Menu>
+                  </div>
+                  
+          )}
+          {usuario == 'UsuarioLogeado'  &&  (
             <div>
               <IconButton
                 size="large"

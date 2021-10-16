@@ -52,7 +52,7 @@ export default class CargaMasivaUsuarios extends React.Component{
             }}
           >
                     <Card className="import-form">
-                        <h1 align="center">Importar Población</h1>
+                        <h1 align="center">Importar Usuarios</h1>
                         <span id="message"></span>
                         <form id="sample_form">
                             <Grid container direction={"column"} spacing={1}>

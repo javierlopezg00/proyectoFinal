@@ -231,8 +231,7 @@ function App() {
           <br />
           <input type="text" className="form-control" name="descripcion" onChange={handleChange} value={noticiaSeleccionada && noticiaSeleccionada.descripcion}/>
           <br />
-          <label>Imagen: </label>
-          <br />
+
         </div>
       </ModalBody>
       <ModalFooter>

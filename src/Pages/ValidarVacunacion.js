@@ -42,6 +42,7 @@ export default function SignUp() {
       };
       console.log(datos);
       enviarData(URL_REG, datos);
+      alert("Usuarios Validados");
   }
   return (
     <div>

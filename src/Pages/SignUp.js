@@ -65,6 +65,8 @@ export default function SignUp() {
       };
       console.log(datos);
       enviarData(URL_REG, datos);
+      window.location.reload();
+      window.location.replace("/signIn");
   }
 
   const [data, setData]=useState([]);
