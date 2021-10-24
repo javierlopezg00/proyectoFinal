@@ -11,6 +11,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 
+import emailjs from 'emailjs-com';
+
 const URL_REG = "http://localhost/ws-login/signUp.php";
 
 const enviarData = async (url,data)=>{
@@ -48,6 +50,9 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
+
+ 
+
   const handleRegister=(event)=>{
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -65,6 +70,16 @@ export default function SignUp() {
       };
       console.log(datos);
       enviarData(URL_REG, datos);
+
+
+      event.preventDefault();
+       emailjs.sendForm('service_q1xan3d', 'verificacion123', event.target, 'user_EQazlbrp9F3z764VXMvDs')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      alert("Revise su correo electronico para la verificacion");
       window.location.reload();
       window.location.replace("/signIn");
   }

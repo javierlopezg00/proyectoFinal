@@ -29,10 +29,14 @@ const enviarData = async (url,data)=>{
 
   window.localStorage.setItem('info', JSON.stringify(json));
   const usuario = JSON.parse(window.localStorage.getItem('info'));
-
+ 
   const conexion = usuario.conectado;
 
   if(conexion === true){
+    const data = JSON.parse(localStorage.getItem('info'));
+    if(data.clave == 123){
+      const nuevaClave = prompt("Su clave es insegura, cambiela:");
+    }
     window.location.reload();
     window.location.replace("/perfil");
   }

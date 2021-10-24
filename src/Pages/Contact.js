@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useRef } from 'react';
+import emailjs from 'emailjs-com';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,7 +10,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
+
 function Copyright(props) {
+  
   return (
     
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -35,16 +39,21 @@ const theme = createTheme({
 });
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  
 
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_q1xan3d', 'template_1t2yo2c', e.target, 'user_EQazlbrp9F3z764VXMvDs')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+      alert("Mensaje enviado con exito");
+      window.location.reload();
+  };
   return (
     <div>
     <ThemeProvider theme={theme}>
@@ -62,12 +71,12 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Contacto
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={sendEmail} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="fname"
-                  name="Nombre"
+                  name="nombre"
                   required
                   fullWidth
                   id="firstName"
@@ -80,8 +89,8 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Apellido"
-                  name="lastName"
+                  label="apellido"
+                  name="apellido"
                   autoComplete="lname"
                 />
               </Grid>
@@ -99,7 +108,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="password"
+                  name="celular"
                   label="Celular"
                   type="text"
                   id="password"
@@ -111,6 +120,7 @@ export default function SignUp() {
               <TextField
                 id="outlined-multiline-static"
                 label="Mensaje"
+                name="mensaje"
                 multiline
                 rows={8}
                 />
