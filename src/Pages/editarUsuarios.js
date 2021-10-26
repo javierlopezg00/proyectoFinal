@@ -141,7 +141,7 @@ const filtrar=(terminoBusqueda)=>{
         if(usuarios.dpi===usuarioSeleccionado.dpi){
           usuarios.nombre=usuarioSeleccionado.nombre;
           usuarios.apellido=usuarioSeleccionado.apellido;
-          usuarios.correo=usuarioSeleccionado.correo;
+          usuarios.correo=usuarioSeleccionado.correo; 
           usuarios.clave=usuarioSeleccionado.clave;
           usuarios.fecha_de_nacimiento=usuarioSeleccionado.fecha_de_nacimiento;
           usuarios.enfermedad=usuarioSeleccionado.enfermedad;
@@ -308,7 +308,7 @@ const filtrar=(terminoBusqueda)=>{
           <option>no</option>
           <option>si</option>
           </select>
-          <label>Vacuna: </label>
+          <label>Centro Vacunacion: </label>
         <br />
           <select name="centro" className="form-control" onChange={handleChange}> 
           <option>null</option>

@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const URL_LOGIN = "http://localhost/ws-login/login.php";
 
+
+
 const enviarData = async (url,data)=>{
   const resp = await fetch (url,{
     method: 'POST',
@@ -33,10 +35,19 @@ const enviarData = async (url,data)=>{
   const conexion = usuario.conectado;
 
   if(conexion === true){
-    const data = JSON.parse(localStorage.getItem('info'));
-    if(data.clave == 123){
-      const nuevaClave = prompt("Su clave es insegura, cambiela:");
+    
+    if(usuario.clave==123){
+      const nuevaClave = prompt("Clave insegura, ingrese una nueva");
+          const datos = {
+            "dpi": usuario.dpi,
+            "nuevaClave": nuevaClave
+          };
+          console.log(datos);
+          const URL_REG = "http://localhost/ws-login/cambioClave.php";
+          enviarData(URL_REG, datos);
+      
     }
+    
     window.location.reload();
     window.location.replace("/perfil");
   }
@@ -45,6 +56,8 @@ const enviarData = async (url,data)=>{
 
 
 function Copyright(props) {
+  
+  
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
@@ -81,6 +94,11 @@ export default function SignIn() {
       };
       console.log(datos);
       enviarData(URL_LOGIN,datos);
+
+
+      
+      
+      
   }
 
   return (

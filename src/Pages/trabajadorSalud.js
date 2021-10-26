@@ -220,7 +220,7 @@ const filtrar=(terminoBusqueda)=>{
 
     
     <Modal isOpen={modalEditar}>
-      <ModalHeader>Editar usuarios</ModalHeader>
+      <ModalHeader>Colocar Vacuna</ModalHeader>
       <ModalBody>
         <div className="form-group">
 
@@ -232,13 +232,7 @@ const filtrar=(terminoBusqueda)=>{
                   ))}
                 </select>
           <br />
-          <br />
-          <label>Dosis 1 colocada: </label><br/>
-          <select name="primerDosisPuesta" onChange={handleChange2} value={usuarioSeleccionado && usuarioSeleccionado.primerDosisPuesta}>
-          <option>No</option>
-          <option>Si</option>
-          </select>
-          <br/>
+
           <br/>
           <label>Dosis 2 colocada: </label><br/>
           <select name="segundaDosisPuesta" onChange={handleChange2} value={usuarioSeleccionado && usuarioSeleccionado.segundaDosisPuesta}>

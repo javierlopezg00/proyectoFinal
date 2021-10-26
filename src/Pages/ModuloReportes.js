@@ -1,51 +1,109 @@
-import React, {useState, useEffect} from 'react';
+
+import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
 import axios from 'axios';
+import Container from '@mui/material/Container';
 
-export default function ModuloReportes() {
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
-  const baseUrl="http://localhost:80/ws-login/editMethod.php";
-  const [usuarioSeleccionado, setusuarioSeleccionado]=useState({
-    fecha1: '',
-    fecha2: ''
-  });
-  const [data, setData]=useState([]);
 
-  const handleChange=e=>{
-    const {name, value}=e.target;
-    setusuarioSeleccionado((prevState)=>({
-      ...prevState,
-      [name]: value
-    }))
-    console.log(usuarioSeleccionado);
-  }
 
-  const peticionPost=async()=>{
-    //Se guarda toda la informacion
-    var f = new FormData();
-    f.append("fecha1", usuarioSeleccionado.fecha1);
-    f.append("fecha2", usuarioSeleccionado.fecha2);
-    f.append("METHOD", "POST");
-    await axios.post(baseUrl, f)
-    .then(response=>{
-      setData(data.concat(response.data));
-    }).catch(error=>{
-      console.log(error);
-    })
-  }
+export default function Reporte1() {
+
+    const fecha1 = React.useRef('');
+
+    const fecha2 = React.useRef('');
+
+
+    const URL_BASE = "http://localhost/ws-login/moduloControl1.php";
+
+    const [users, setUsers] = React.useState(['']);
+    console.log(users);
+    const HandleCambiarDisponibilidad = (event) => {
+        event.preventDefault();
+        const fechasss = {
+            fecha1: fecha1.current.value,
+            fecha2: fecha2.current.value
+        };
+            axios.post(URL_BASE, JSON.stringify(fechasss)).then(response => {
+                setUsers((response.data));
+            });
+            console.log(fechasss);
+            console.log(users);
+    };
     return (
         <div>
-        <Box
+            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Container component="main" maxWidth="xs">
+            <Box
             sx={{
               marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
           >
-           <h1>Personas vacunadas de una fecha hasta otra</h1>
-           <TextField type ="date" name="fecha1" onChange={handleChange}/>
-           <TextField type ="date" name="fecha2"  onChange={handleChange}/>
-           <TextField type ="button" value="Descargar" onClick="peticionPost"/>
-           </Box>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="fecha1"
+                        type="date"
+                        defaultValue="0000-00-00"
+                        inputRef={fecha1}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="fecha2"
+                        type="date"
+                        defaultValue="0000-00-00"
+                        inputRef={fecha2}
+                    />
+                    <Button
+                        onClick={HandleCambiarDisponibilidad}
+                        type="submit"
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Crear archivo
+                    </Button>
+                    <div>
+                    
+                    <ReactHTMLTableToExcel
+                        id="test-table-xls-button"
+                        className="download-table-xls-button"
+                        table="table-to-xls"
+                        filename="tablexls"
+                        sheet="tablexls"
+                        buttonText="Descargar archivo"/>
+                    
+                    {users != '' &&    
+                    <div id ="desaparecer">
+                    <table id="table-to-xls">
+                    {users.map((n) => (
+                      <tr>
+                      {
+                        n.map((v) => (
+                          <th>{v}</th>
+                        ))}
+                      </tr>
+                    ))}
+                    </table>
+                    </div>
+                        }
+                    </div>
+
+                </Box>
+                </Container>
+            </Box>
         </div>
-    )
+
+
+
+
+    );
 }
