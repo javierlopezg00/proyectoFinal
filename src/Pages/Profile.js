@@ -1,9 +1,48 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import axios from 'axios';
+import Button from '@mui/material/Button';
 
 export default function Profile() {
 
+
+    //Obtener centros de vacunacion
+  const [datas, setDatas]=useState([]);
+  const baseUrlVacunas="http://localhost:80/ws-login/centrosVDinamicos.php";
+  const peticionGet2=async()=>{
+    await axios.get(baseUrlVacunas)
+    .then(response=>{
+      setDatas(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+  useEffect(()=>{
+    peticionGet2();
+  },[])
+
+
+  var datos;
+  const handleChange=e=>{
+     datos ={
+    'dpi': data.dpi,
+    'centroV':e.target.value
+    }
+    console.log(datos);
+  }
+
+  const URL_BASE = "http://localhost/ws-login/cambioCV.php";
+  const [centroVH, setcentroVH] = React.useState(['']);
+  const cambiar=e=>{
+    axios.post(URL_BASE, JSON.stringify(datos)).then(response => {
+      setcentroVH((response.data));
+  });
+
+ 
+  }
+
+  //Fin cambio de vacunacion
     const data = JSON.parse(localStorage.getItem('info'));
 
     const styles = StyleSheet.create({
@@ -78,6 +117,17 @@ export default function Profile() {
             <h4>Fecha Primer Dosis: </h4> <p>{data.primerDosis}</p>
             <h4>Fecha Segunda Dosis: </h4><p>{data.segundaDosis}</p>
             <h4>Centro De Vacunacion: </h4><p>{data.centroVacunacionE}</p>
+            {data.centroVacunacionE == "null" &&
+            <div>
+            <select name="centro" className="form-control" onChange ={handleChange}> 
+            <option>null</option>
+                    {datas.map(centro=>(
+                        <option>{centro.nombre}</option>
+                    ))}
+                  </select>
+                <Button onClick={cambiar}>Cambiar Centro</Button>        
+                  </div>     
+            }
             <h4>Vacuna: </h4><p>{data.vacuna}</p>
             <h4>Primer Dosis: </h4><p>{data.primerDosisPuesta}</p>
             <h4>Segunda Dosis: </h4><p>{data.segundaDosisPuesta}</p>

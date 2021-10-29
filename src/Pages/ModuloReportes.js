@@ -10,7 +10,7 @@ import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 
-export default function Reporte1() {
+export default function ModuloReportes() {
 
     const fecha1 = React.useRef('');
 
@@ -21,7 +21,7 @@ export default function Reporte1() {
 
     const [users, setUsers] = React.useState(['']);
     console.log(users);
-    const HandleCambiarDisponibilidad = (event) => {
+    const crearArchivo = (event) => {
         event.preventDefault();
         const fechasss = {
             fecha1: fecha1.current.value,
@@ -45,6 +45,7 @@ export default function Reporte1() {
               alignItems: 'center',
             }}
           >
+          <h1>Usuarios vacunados Por Fechas</h1>
                     <TextField
                         margin="normal"
                         required
@@ -64,7 +65,7 @@ export default function Reporte1() {
                         inputRef={fecha2}
                     />
                     <Button
-                        onClick={HandleCambiarDisponibilidad}
+                        onClick={crearArchivo}
                         type="submit"
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
@@ -77,13 +78,21 @@ export default function Reporte1() {
                         id="test-table-xls-button"
                         className="download-table-xls-button"
                         table="table-to-xls"
-                        filename="tablexls"
+                        filename="UsuariosVacunadosEntreFechas"
                         sheet="tablexls"
                         buttonText="Descargar archivo"/>
                     
                     {users != '' &&    
                     <div id ="desaparecer">
                     <table id="table-to-xls">
+                    <th>DPI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha Primer Vacunacion</th>
+                    <th>Fecha Segunda Vacunacion</th>
+                    <th>Centro Vacunacion</th>
+                    <th>Primer Vacuna Puesta</th>
+                    <th>Segunda Vacuna Puesta</th>
                     {users.map((n) => (
                       <tr>
                       {

@@ -74,7 +74,16 @@ const administrador = [
   },
   {
     listText: <a href="/ValidarVacunacion">Validar Vacunacion</a>
-  }
+  },
+  {
+    listText: <a href="/ModuloReportes">Usuarios vacunados en las fechas</a>
+  },
+  {
+    listText: <a href="/ModuloReportes2">Usuarios vacunados por centro</a>
+  },
+  {
+    listText: <a href="/ModuloReportes3">Usuarios logueados</a>
+  },
 ];
 
 const trabajadorDeSalud = [
@@ -83,9 +92,6 @@ const trabajadorDeSalud = [
   },
   {
     listText: <a href="/trabajadorSalud">Aplicacion de Dosis</a>
-  },
-  {
-    listText: <a href="/editarUsuarios">Administrador de usuarios</a>
   }
 ];
 //pruebaEND
@@ -193,12 +199,14 @@ export default function MenuAppBar() {
           <Button variant="text" color="secondary"><NavLink to = "/news" >Noticias</NavLink></Button>
           <Button variant="text" color="secondary"><NavLink to = "/information" >Informacion</NavLink></Button>
           <Button variant="text" color="secondary"><NavLink to = "/contact" >Contacto</NavLink></Button>
+          <Button variant="text" color="secondary"><NavLink to = "/Token" >Token</NavLink></Button>
           </ThemeProvider>
           <Drawer open={open} anchor="right" onClose={toggleSlider}>
               {sideList()}
             </Drawer>
           {usuario == '' &&  (
             <div>
+            
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -227,6 +235,7 @@ export default function MenuAppBar() {
               <MenuItem onClick={handleClose}><NavLink to ="/signIn">Iniciar Sesion</NavLink></MenuItem>
               <MenuItem onClick={handleClose}><NavLink to ="/signUp">Registro</NavLink></MenuItem>
               </Menu>
+              
                   </div>
                   
           )}

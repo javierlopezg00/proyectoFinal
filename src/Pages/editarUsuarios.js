@@ -235,7 +235,7 @@ const filtrar=(terminoBusqueda)=>{
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody> 
         {data.map(usuarios=>(
           <tr key={usuarios.dpi}>
             <td>{usuarios.dpi}</td>
