@@ -181,6 +181,7 @@ const filtrar=(terminoBusqueda)=>{
     </Box>
 </Container>
       <br /><br />
+      {data != '' &&   
     <table className="table table-striped">
       <thead>
         <tr>
@@ -217,6 +218,7 @@ const filtrar=(terminoBusqueda)=>{
       </tbody> 
 
     </table>
+      }
 
     
     <Modal isOpen={modalEditar}>

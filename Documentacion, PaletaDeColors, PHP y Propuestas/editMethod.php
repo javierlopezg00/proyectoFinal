@@ -33,8 +33,9 @@ if($_POST['METHOD']=='POST'){
     $fechaActual = date('Y-m-d');
     $primerDosis = date('Y-m-d',strtotime($fechaActual."+ 7 day"));
     $grupoPrioritario=$_POST['grupoPrioritario'];
+    $centro=$_POST['centro'];
 
-    $query="call fechaUsuario('$dpi','$nombre','$apellido','$correo', '$clave', '$fecha_de_nacimiento', '$enfermedad', '$celular', '$tipoUsuario','$grupoPrioritario', 'hola')";
+    $query="call fechaUsuario('$dpi','$nombre','$apellido','$correo', '$clave', '$fecha_de_nacimiento', '$enfermedad', '$celular', '$tipoUsuario','$grupoPrioritario', '$centro')";
     $resultado=metodoPost($query);
     echo json_encode($resultado);
     header("HTTP/1.1 200 OK");

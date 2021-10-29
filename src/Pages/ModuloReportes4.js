@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import axios from 'axios';
@@ -10,19 +10,32 @@ import BotonesModuloReporte from '../components/BotonesModuloReporte';
 
 
 
-export default function ModuloReportes3() {
-  const URL_BASE=  "http://localhost/ws-login/moduloControl3.php";
+export default function ModuloReportes4() {
+
+  //Capturar informacion de los imputs
+  var dosisE;
+  const handleChange=e=>{
+    dosisE=e.target.value;
+    console.log(dosisE);
+  }
+
+
+  const URL_BASE=  "http://localhost/ws-login/moduloControl4.php";
   const [users, setUsers] = React.useState(['']);
 
   const crearArchivo = (event) => {
     event.preventDefault();
+    const dosis = {
+        dosis: dosisE
+    };
 
-    axios.get(URL_BASE).then(response => {
+    axios.post(URL_BASE, JSON.stringify(dosis)).then(response => {
         setUsers((response.data));
     });
-    console.log("das");
+    
     console.log(users);
-  };
+    console.log(dosis);
+  }
 
     return (
         <div>
@@ -36,8 +49,16 @@ export default function ModuloReportes3() {
               alignItems: 'center',
             }}
           >
-                    <h2>Usuarios que ya ingresaron al portal</h2>
-                   
+                    <h2>Personas que no asistieron</h2>
+                    <select 
+                    name="centro" 
+                    className="form-control" 
+                    onChange ={handleChange}> 
+                     <option>null</option>
+                    <option>Primer Dosis</option>
+                    <option>Segunda Dosis</option>
+                    <option>Cualquier Dosis</option>
+                </select>
                     <Button
                         onClick={crearArchivo}
                         type="submit"
@@ -46,28 +67,26 @@ export default function ModuloReportes3() {
                     >
                         Crear archivo
                     </Button>
-
- <div>
- <ReactHTMLTableToExcel
+                    <div>
+                    <ReactHTMLTableToExcel
                         id="test-table-xls-button"
                         className="download-table-xls-button"
                         table="table-to-xls"
-                        filename="IngresoAlPortal"
+                        filename="Inasistencia"
                         sheet="tablexls"
                         buttonText="Descargar archivo"/>
-
-
+                   
+                        <div id="desaparecer">
                     {users != '' &&    
-                    <div id ="desaparecer">
                     <table id="table-to-xls">
-                    <tr>
                     <th>dpi</th>
                     <th>nombre</th>
-                    <th>Tipo de Usuario</th>
+                    <th>Apellido</th>
+                    <th>Fecha Primer Dosis</th>
+                    <th>Fecha Segunda Dosis</th>
                     <th>Numero de usuarios: {users.length}</th>
-                    </tr>
                     {users.map((n) => (
-                        <tr key={n.dpi}>
+                        <tr>
                         {
                           n.map((v) => (
                             <td>{v}</td>
@@ -75,18 +94,13 @@ export default function ModuloReportes3() {
                         </tr>
                       ))}
                     </table>
-                    </div>
                           }
-                    </div> 
-                    
-  
-                    
-                    
+                          </div>
+                    </div>
                 </Box>
-                </Container>.
+                </Container>
                 <br/>
                 <BotonesModuloReporte/>
-                
             </Box>
         </div>
 

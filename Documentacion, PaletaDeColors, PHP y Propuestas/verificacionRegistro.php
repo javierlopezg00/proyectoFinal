@@ -6,7 +6,9 @@ header('Access-Control-Allow-Origin: *');
 
 if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['dpi'])){
-        $query="select * from usuarios where dpi=".$_GET['dpi'];
+        $query="SELECT * FROM usuarios INNER JOIN fechavacunacion ON usuarios.dpi = fechavacunacion.dpi 
+        INNER JOIN usuariovacunado ON fechavacunacion.dpi = usuariovacunado.dpi
+        inner join vacunacolocada on fechavacunacion.dpi = vacunacolocada.dpi;";
         $resultado=metodoGet($query);
         echo json_encode($resultado->fetch(PDO::FETCH_ASSOC));
     }else{

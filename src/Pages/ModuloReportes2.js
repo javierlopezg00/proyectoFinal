@@ -6,6 +6,7 @@ import axios from 'axios';
 import Container from '@mui/material/Container';
 
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import BotonesModuloReporte from '../components/BotonesModuloReporte';
 
 
 
@@ -115,6 +116,9 @@ export default function ModuloReportes2() {
                     </div> 
                 </Box>
                 </Container>
+
+                <br/>
+                <BotonesModuloReporte/>
             </Box>
         </div>
 

@@ -16,6 +16,7 @@ import AdministradorNoticias from '../Pages/AdministradorNoticias'
 import ModuloReportes from '../Pages/ModuloReportes';
 import ModuloReportes2 from '../Pages/ModuloReportes2';
 import ModuloReportes3 from '../Pages/ModuloReportes3';
+import ModuloReportes4 from '../Pages/ModuloReportes4';
 
 import Token from '../Pages/Token';
 
@@ -49,6 +50,7 @@ export default function AppRouter() {
         <Route   path="/ModuloReportes"  component={ModuloReportes}/>
         <Route   path="/ModuloReportes2"  component={ModuloReportes2}/>
         <Route   path="/ModuloReportes3"  component={ModuloReportes3}/>
+        <Route   path="/ModuloReportes4"  component={ModuloReportes4}/>
         <Route   path="/Token"  component={Token}/>
         <Route path="*">
             <h1>404 Not Found</h1>

@@ -67,7 +67,7 @@ const administrador = [
     listText: <a href="/AdministradorNoticias">Administrador de nocitias</a>
   },
   {
-    listText: <a href="/vacunas">Vacunas</a>
+    listText: <a href="/vacunas">Administrador Vacunas</a>
   },
   {
     listText: <a href="/cargaUsuarios">Cargar Usuarios</a>
@@ -76,14 +76,8 @@ const administrador = [
     listText: <a href="/ValidarVacunacion">Validar Vacunacion</a>
   },
   {
-    listText: <a href="/ModuloReportes">Usuarios vacunados en las fechas</a>
-  },
-  {
-    listText: <a href="/ModuloReportes2">Usuarios vacunados por centro</a>
-  },
-  {
-    listText: <a href="/ModuloReportes3">Usuarios logueados</a>
-  },
+    listText: <a href="/ModuloReportes">Modulos de reporte</a>
+  }
 ];
 
 const trabajadorDeSalud = [

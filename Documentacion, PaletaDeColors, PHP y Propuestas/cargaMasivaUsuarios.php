@@ -48,12 +48,73 @@ switch ($method) {
     grupoPrioritario = @column10  
     ';
 	 
+
+    $sql1 = 'LOAD DATA LOCAL INFILE "'.$file_location.'" IGNORE INTO TABLE usuariosvalidadosvacuna FIELDS TERMINATED BY "," 
+    LINES TERMINATED BY "\n" 
+    IGNORE 1 LINES 
+    (@column1,@column2,@column3,@column4,@column5,@column6,@column7,@column8,@column9,@column10) 
+    SET 
+    dpi = @column1, 
+    enfermedad = @column7, 
+    grupoPrioritario = @column10,  
+    fecha_de_nacimiento = STR_TO_DATE(@column6, "%d/%m/%Y"),  
+    validado = "no"
+    ';
 	
+    $sql2 = 'LOAD DATA LOCAL INFILE "'.$file_location.'" IGNORE INTO TABLE centrovacunacione FIELDS TERMINATED BY "," 
+    LINES TERMINATED BY "\n" 
+    IGNORE 1 LINES 
+    (@column1,@column2,@column3,@column4,@column5,@column6,@column7,@column8,@column9,@column10) 
+    SET 
+    dpi = @column1, 
+    centroVacunacionE = "null"
+    ';
+    $sql3 = 'LOAD DATA LOCAL INFILE "'.$file_location.'" IGNORE INTO TABLE fechavacunacion FIELDS TERMINATED BY "," 
+    LINES TERMINATED BY "\n" 
+    IGNORE 1 LINES 
+    (@column1,@column2,@column3,@column4,@column5,@column6,@column7,@column8,@column9,@column10) 
+    SET 
+    dpi = @column1, 
+    primerDosis = STR_TO_DATE(0000/00/00, "%Y/%m/%d"),
+    segundaDosis = STR_TO_DATE(0000/00/00, "%Y/%m/%d")
+    ';
+    $sql4 = 'LOAD DATA LOCAL INFILE "'.$file_location.'" IGNORE INTO TABLE usuariovacunado FIELDS TERMINATED BY "," 
+    LINES TERMINATED BY "\n" 
+    IGNORE 1 LINES 
+    (@column1,@column2,@column3,@column4,@column5,@column6,@column7,@column8,@column9,@column10) 
+    SET 
+    dpi = @column1, 
+    primerDosisPuesta = "no",
+    segundaDosisPuesta = "no"
+    ';
+    $sql5 = 'LOAD DATA LOCAL INFILE "'.$file_location.'" IGNORE INTO TABLE vacunacolocada FIELDS TERMINATED BY "," 
+    LINES TERMINATED BY "\n" 
+    IGNORE 1 LINES 
+    (@column1,@column2,@column3,@column4,@column5,@column6,@column7,@column8,@column9,@column10) 
+    SET 
+    dpi = @column1, 
+    vacuna = "null"
+    ';
+    $sql6 = 'LOAD DATA LOCAL INFILE "'.$file_location.'" IGNORE INTO TABLE token FIELDS TERMINATED BY "," 
+    LINES TERMINATED BY "\n" 
+    IGNORE 1 LINES 
+    (@column1,@column2,@column3,@column4,@column5,@column6,@column7,@column8,@column9,@column10) 
+    SET 
+    dpi = @column1, 
+    token = CONCAT(1,@column1,(RAND() *(999999-10000)+10000))
+    ';
 }
 
 // run SQL statement
 //echo $sql;
 $result = mysqli_query($con, $sql);
+$result1 = mysqli_query($con, $sql1);
+$result2 = mysqli_query($con, $sql2);
+$result3 = mysqli_query($con, $sql3);
+$result4 = mysqli_query($con, $sql4);
+$result5 = mysqli_query($con, $sql5);
+$result6 = mysqli_query($con, $sql6);
+
 
 
 // die if SQL statement failed

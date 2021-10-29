@@ -15,7 +15,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 	$usuario = $dataObject-> dpi;
 	$pas =	$dataObject-> clave;
     
-  if ($nueva_consulta = $mysqli->prepare("SELECT *  FROM datosUsuarios WHERE dpi = ?")) {
+  if ($nueva_consulta = $mysqli->prepare("SELECT *  FROM datosusuarios WHERE dpi = ?")) {
         $nueva_consulta->bind_param('s', $usuario);
         $nueva_consulta->execute();
         $resultado = $nueva_consulta->get_result();
@@ -31,7 +31,7 @@ $method = $_SERVER['REQUEST_METHOD'];
                  'celular'=>$datos['celular'], 'tipoUsuario'=>$datos['tipoUsuario'], 'grupoPrioritario'=>$datos['grupoPrioritario']
                  , 'centroVacunacionE'=>$datos['centroVacunacionE'], 'primerDosis'=>$datos['primerDosis']
                  , 'segundaDosis'=>$datos['segundaDosis'], 'validado'=>$datos['validado'], 'primerDosisPuesta'=>$datos['primerDosisPuesta']
-                 , 'segundaDosisPuesta'=>$datos['segundaDosisPuesta'], 'vacuna'=>$datos['vacuna']
+                 , 'segundaDosisPuesta'=>$datos['segundaDosisPuesta'], 'vacuna'=>$datos['vacuna'], 'saludo'=>$datos['saludo'], 'token'=>$datos['token']
                   ) );
               }
 
